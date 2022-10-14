@@ -2,14 +2,16 @@ import { useState } from "react";
 import logo from "../assets/logo.png";
 import login_img from "../assets/login-img.svg";
 
-function Login() { 
+function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <div className="container">
       <header className="h-20 w-28">
         <img src={logo} alt="logo" className="h-14 w-28" />
       </header>
-      <main className="flex">
-        <div className="w-3/4 h-full m-3 p-3">
+      <main className="block h-full w-full m-auto text-center md:flex">
+        <div className="w-3/4 h-full m-3 p-3 mx-auto">
           <h1 className="text-orange-900 m-1 text-3xl font-bold tracking-wider">
             Welcome to your professional community
           </h1>
@@ -30,7 +32,7 @@ function Login() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <p className="text-left w-3/4   text-sm">
+            <p className="text-center m-auto md:text-left w-3/4   text-sm">
               By clicking Agree & Join, you agree to the LinkedIn User
               Agreement, Privacy Policy, and Cookie Policy.
             </p>
@@ -42,10 +44,10 @@ function Login() {
             "
               className="bg-sky-600 text-white px-5 py-3 rounded-full my-3  w-3/4 cursor-pointer"
             />
-             
+            {/* {error && <p className="error">Some Thing is Wrong  :( </p>} */}
           </form>
         </div>
-        <div className="w-3/4 h-full m-3 p-3">
+        <div className="w-3/4 h-full m-3 p-3 mx-auto">
           <img className="" src={login_img} alt="login_img" />
         </div>
       </main>
