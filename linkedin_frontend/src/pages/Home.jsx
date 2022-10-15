@@ -4,6 +4,7 @@ import { useState } from "react";
 import LeftPanel from "../components/LeftPanel";
 import Feed from "../components/Feed";
 import Search from "../components/Search";
+import Notification from "../components/Notification";
 
 function Home() {
   const [active, setActive] = useState("home");
@@ -14,6 +15,8 @@ function Home() {
       <main className="flex w-full  justify-between">
         <LeftPanel />
         {active === "home" ? <Feed /> : ""}
+        {active === "notification" ? <Notification /> : ""}
+
         <Search />
       </main>
     </>

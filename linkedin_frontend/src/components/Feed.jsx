@@ -5,7 +5,7 @@ function Feed() {
   let test =
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, a.";
   return (
-    <div className="border  border-red-500 w-1/2 mt-2   flex flex-col items-center ">
+    <div className=" w-1/2 mt-2   flex flex-col items-center ">
       <Job name={"SE"} photo={"NA"} description={test} title="Full Stack" />
       <Job name={"SE"} photo={"NA"} description={test} title="Full Stack" />
       <Job name={"SE"} photo={"NA"} description={test} title="Full Stack" />

@@ -1,4 +1,5 @@
 import React from "react";
+
 import profile from "../assets/user.png";
 
 function Job({ name, photo, description, title }) {

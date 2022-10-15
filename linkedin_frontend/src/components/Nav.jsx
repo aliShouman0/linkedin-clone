@@ -6,6 +6,7 @@ import profile from "../assets/user.png";
 import search from "../assets/search.svg";
 
 function Nav({ active, setActive }) {
+  let notificationNb = 1;
   return (
     <nav className="w-full h-auto bg-gray-200 flex items-center justify-between ">
       <img src={logo} alt="logo" className="h-12 w-20 ml-4  " />
@@ -29,7 +30,12 @@ function Nav({ active, setActive }) {
           onClick={() => setActive("notification")}
         >
           <img src={notification} alt="Home" className="m-auto" />
-          Notifications
+          Notifications &nbsp;
+          {notificationNb > 0 && (
+            <small className="text-xs text-red-500 font-bold">
+              {notificationNb}
+            </small>
+          )}
         </button>
 
         <button
