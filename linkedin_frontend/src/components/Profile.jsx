@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import profile from "../assets/user.png";
-import camera from "../assets/camera.svg";
+import profile from "../assets/user.png"; 
 import EditProfile from "./EditProfile";
 
 function Profile() {
   const [editProfile, setEditProfile] = useState(false);
   return (
-    <div className="w-full flex  flex-col justify-center items-center">
+    <div className="w-1/2 flex  flex-col justify-center items-center">
       <div className="w-full flex items-center ">
         <div className="w-1/2 text-center">
           <img src={profile} alt="Home" className="m-auto h-28 w-28" />

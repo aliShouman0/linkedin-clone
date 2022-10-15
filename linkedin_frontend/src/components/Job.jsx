@@ -2,7 +2,7 @@ import React from "react";
 
 import profile from "../assets/user.png";
 
-function Job({ name, photo, description, title }) {
+function Job({ name, photo, description, title, isCompany }) {
   return (
     <>
       <div className="bg-gray-300 w-11/12 h-auto  m-2 p-2 rounded-lg">
@@ -15,9 +15,11 @@ function Job({ name, photo, description, title }) {
             />
             <p>{name} </p>
           </div>
-          <button className="text-xs h-7 p-1.5 m-auto   bg-slate-500 rounded-md mr-2 ">
-            Follow
-          </button>
+          {!isCompany && (
+            <button className="text-xs h-7 p-1.5 m-auto   bg-slate-500 rounded-md mr-2 ">
+              Follow
+            </button>
+          )}
         </div>
         <div className="m-3">
           <p>
@@ -28,14 +30,18 @@ function Job({ name, photo, description, title }) {
             {description}
           </p>
         </div>
-        <div className="text-right">
-          <button className="p-1.5 text-sm bg-slate-500 rounded-md mr-2 ">
-            Apply
-          </button>
-        </div>
+        {!isCompany && (
+          <div className="text-right">
+            <button className="p-1.5 text-sm bg-slate-500 rounded-md mr-2 ">
+              Apply
+            </button>
+          </div>
+        )}
       </div>
     </>
   );
 }
-
+Job.defaultProps = {
+  isCompany: false,
+};
 export default Job;

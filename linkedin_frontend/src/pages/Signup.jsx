@@ -16,8 +16,8 @@ function Signup() {
   const [error, setError] = useState(false);
   const [company, setCompany] = useState(false);
   const [type, setType] = useState("");
-  const [degree, setDescription] = useState("");
-  const [description, setDegree] = useState("");
+  const [description, setDescription] = useState("");
+  const [degree, setDegree] = useState("");
   const [experience, setExperience] = useState("");
   const [location, setLocation] = useState("");
 

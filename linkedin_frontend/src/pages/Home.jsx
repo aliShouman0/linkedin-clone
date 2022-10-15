@@ -23,8 +23,7 @@ function Home() {
         {active === "applicant" ? <Applicant /> : ""}
         {active === "notification" ? <Notification  /> : ""}
         {active === "profile" ? <Profile /> : ""}
-
-        <Search />
+        <Search/>
       </main>
     </>
   );
