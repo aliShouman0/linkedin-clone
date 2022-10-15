@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import profile from "../assets/user.png";
 import camera from "../assets/camera.svg";
+import EditProfile from "./EditProfile";
 
 function Profile() {
+  const [editProfile, setEditProfile] = useState(false);
   return (
     <div className="w-full flex  flex-col justify-center items-center">
       <div className="w-full flex items-center ">
@@ -28,7 +30,13 @@ function Profile() {
           </p>
         </div>
       </div>
-      <button className=" bg-slate-500 p-2 w-3/4 rounded-lg ">Edit</button>
+      <button
+        className=" bg-slate-500 p-2 w-3/4 rounded-lg "
+        onClick={() => setEditProfile(true)}
+      >
+        Edit
+      </button>
+      {editProfile&&<EditProfile close={setEditProfile}/>}
     </div>
   );
 }
