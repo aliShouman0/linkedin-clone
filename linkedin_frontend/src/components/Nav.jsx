@@ -8,7 +8,7 @@ import search from "../assets/search.svg";
 function Nav({ active, setActive, isCompany }) {
   let notificationNb = 1;
   return (
-    <nav className="w-full h-auto bg-gray-200 flex items-center justify-between ">
+    <nav className="w-full h-auto bg-gray-200 flex items-center justify-between   border-b-2 border-blue-600">
       <img src={logo} alt="logo" className="h-20 w-32 ml-4  " />
       <div>
         <button

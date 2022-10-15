@@ -5,8 +5,8 @@ import profile from "../assets/user.png";
 function Job({ name, photo, description, title, isCompany }) {
   return (
     <>
-      <div className="bg-gray-300 w-11/12 h-auto  m-2 p-2 rounded-lg">
-        <div className="flex justify-between">
+      <div className="bg-gray-300 w-11/12 h-auto  m-2 p-2 rounded-lg  shadow-2xl shadow-blue-600/25 ">
+        <div className="flex justify-between  ">
           <div className="flex items-center m-3">
             <img
               src={photo !== "NA" ? photo : profile}

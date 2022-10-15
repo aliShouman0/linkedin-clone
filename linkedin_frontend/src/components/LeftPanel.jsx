@@ -4,7 +4,7 @@ import logout from "../assets/logout.png";
 
 function LeftPanel() {
   return (
-    <div className="w-1/6  h-96 rounded-b-xl bg-gray-200  flex flex-col items-center justify-between">
+    <div className="w-1/6  h-96 m-2 rounded-xl bg-gray-200  flex flex-col items-center justify-between  border-4 border-blue-600">
       <div className="text-center my-5">
         <div className=" m-2">
           <img src={profile} alt="Home" className="m-auto h-7 w-7" />

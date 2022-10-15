@@ -2,6 +2,7 @@ import React from "react";
 import profile from "../assets/user.png";
 
 function Applicant() {
+  // if time exist add filter to show only specific job
   return (
     <div class="w-3/4 shadow-2xl  rounded-lg m-auto">
       <table class="w-full text-sm text-left  text-white  ">
@@ -42,6 +43,7 @@ function Applicant() {
             <td class="py-4 px-4">cs</td>
             <td class="py-4 px-4">3 years</td>
           </tr>
+
           <tr class="border-b bg-blue-400  text-xl border-blue-900 ">
             <td class="py-4 px-4   ">
               <img src={profile} alt="Home" className="m-auto h-7 w-7" />
