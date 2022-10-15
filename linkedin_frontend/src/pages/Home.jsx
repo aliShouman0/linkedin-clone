@@ -5,6 +5,7 @@ import LeftPanel from "../components/LeftPanel";
 import Feed from "../components/Feed";
 import Search from "../components/Search";
 import Notification from "../components/Notification";
+import Profile from "../components/Profile";
 
 function Home() {
   const [active, setActive] = useState("home");
@@ -16,6 +17,7 @@ function Home() {
         <LeftPanel />
         {active === "home" ? <Feed /> : ""}
         {active === "notification" ? <Notification /> : ""}
+        {active === "profile" ? <Profile /> : ""}
 
         <Search />
       </main>
