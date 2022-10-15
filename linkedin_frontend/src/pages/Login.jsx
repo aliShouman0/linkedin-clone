@@ -8,21 +8,21 @@ function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(true);
+  const [error, setError] = useState(false);
 
   const submit = (e) => {
     e.preventDefault();
     // setLoad(true);
     // setdisabled(true);
-    // setError(false);
+    setError(false);
     if (!email) {
-      // setError(true);
+      setError(true);
       // setdisabled(false);
       // setLoad(false);
       return;
     }
     if (!password) {
-      // setError(true);
+      setError(true);
       // setdisabled(false);
       // setLoad(false);
       return;

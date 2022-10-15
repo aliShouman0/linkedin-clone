@@ -10,32 +10,33 @@ function Signup() {
   const [phone, setphone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
 
   const submit = (e) => {
     e.preventDefault();
     // setLoad(true);
     // setdisabled(true);
-    // setError(false);
+    setError(false);
     if (!email) {
-      // setError(true);
+      setError(true);
       // setdisabled(false);
       // setLoad(false);
       return;
     }
     if (!name) {
-      // setError(true);
+      setError(true);
       // setdisabled(false);
       // setLoad(false);
       return;
     }
     if (!phone) {
-      // setError(true);
+      setError(true);
       // setdisabled(false);
       // setLoad(false);
       return;
     }
     if (!password) {
-      // setError(true);
+      setError(true);
       // setdisabled(false);
       // setLoad(false);
       return;
@@ -88,6 +89,11 @@ function Signup() {
               By clicking Agree & Join, you agree to the LinkedIn User
               Agreement, Privacy Policy, and Cookie Policy.
             </p>
+            {error && (
+              <p className=" mx-auto  w-1/2    rounded-md  text-red-900">
+                Some Thing is Wrong :(
+              </p>
+            )}
             <input
               type={"submit"}
               // disabled={disabled}
