@@ -7,7 +7,7 @@ import search from "../assets/search.svg";
 
 function Nav({ active, setActive }) {
   return (
-    <nav className="w-screen h-auto bg-gray-200 flex items-center justify-between ">
+    <nav className="w-full h-auto bg-gray-200 flex items-center justify-between ">
       <img src={logo} alt="logo" className="h-12 w-20 ml-4  " />
       <div>
         <button
@@ -48,7 +48,7 @@ function Nav({ active, setActive }) {
           className="p-1.5 w-1/2 rounded-lg border border-black outline-none focus:border-sky-600 ml-auto"
           placeholder="Search"
         />
-        <button className="ml-1 mr-4">
+        <button className="ml-1 mr-1">
           <img src={search} alt="search" />
         </button>
       </div>
