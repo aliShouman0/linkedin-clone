@@ -4,6 +4,7 @@ import { useState } from "react";
 import LeftPanel from "../components/LeftPanel";
 import Feed from "../components/Feed";
 import Applicant from "../components/Applicant";
+import Company from "../components/Company";
 import Search from "../components/Search";
 import Notification from "../components/Notification";
 import Profile from "../components/Profile";
@@ -17,9 +18,9 @@ function Home() {
       <Nav active={active} setActive={setActive} isCompany={isCompany}/>
       <main className="flex w-full  justify-between">
         <LeftPanel />
-        {active === "home" ? <Feed /> : ""}
+        {active === "home" && !isCompany ? <Feed /> : ""}
+        {active === "home" && isCompany ? <Company /> : ""}
         {active === "applicant" ? <Applicant /> : ""}
-
         {active === "notification" ? <Notification  /> : ""}
         {active === "profile" ? <Profile /> : ""}
 
