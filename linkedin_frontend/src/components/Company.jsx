@@ -8,7 +8,7 @@ function Company() {
   let test =
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, a.";
   return (
-    <div className=" w-1/2 mt-2   flex flex-col items-center ">
+    <div className=" w-3/4 mt-2 mx-auto  flex flex-col items-center ">
       <button
         onClick={() => setAddJob(true)}
         className="bg-gray-500 p-2 rounded-lg w-full text-lg"

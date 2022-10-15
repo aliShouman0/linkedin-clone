@@ -15,15 +15,15 @@ function Home() {
 
   return (
     <>
-      <Nav active={active} setActive={setActive} isCompany={isCompany}/>
+      <Nav active={active} setActive={setActive} isCompany={isCompany} />
       <main className="flex w-full  justify-between">
         <LeftPanel />
         {active === "home" && !isCompany ? <Feed /> : ""}
         {active === "home" && isCompany ? <Company /> : ""}
         {active === "applicant" ? <Applicant /> : ""}
-        {active === "notification" ? <Notification  /> : ""}
+        {active === "notification" ? <Notification /> : ""}
         {active === "profile" ? <Profile /> : ""}
-        <Search/>
+        {!isCompany &&active !== "profile"&& <Search />}
       </main>
     </>
   );

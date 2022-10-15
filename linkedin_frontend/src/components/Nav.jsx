@@ -9,11 +9,11 @@ function Nav({ active, setActive, isCompany }) {
   let notificationNb = 1;
   return (
     <nav className="w-full h-auto bg-gray-200 flex items-center justify-between ">
-      <img src={logo} alt="logo" className="h-12 w-20 ml-4  " />
+      <img src={logo} alt="logo" className="h-20 w-32 ml-4  " />
       <div>
         <button
           className={`text-sm mx-1 p-2  rounded-sm w-28 ${
-            active === "home" ? "bg-gray-300   border-b-2 border-black" : ""
+            active === "home" ? "bg-gray-300   border-b-4 border-blue-600" : ""
           }`}
           onClick={() => setActive("home")}
         >
@@ -24,7 +24,7 @@ function Nav({ active, setActive, isCompany }) {
         <button
           className={`text-sm mx-1 p-2 rounded-sm w-28  ${
             active === "notification" || active === "applicant"
-              ? "bg-gray-300   border-b-2 border-black"
+              ? "bg-gray-300   border-b-4 border-blue-600"
               : ""
           }`}
           onClick={() => setActive(isCompany ? "applicant" : "notification")}
@@ -41,7 +41,7 @@ function Nav({ active, setActive, isCompany }) {
 
         <button
           className={`text-sm mx-1 p-2 rounded-sm w-28 ${
-            active === "profile" ? "bg-gray-300   border-b-2 border-black " : ""
+            active === "profile" ? "bg-gray-300   border-b-4 border-blue-600 " : ""
           }`}
           onClick={() => setActive("profile")}
         >
@@ -55,10 +55,10 @@ function Nav({ active, setActive, isCompany }) {
           <>
             <input
               type="text"
-              className="p-1.5 w-1/2 rounded-lg border border-black outline-none focus:border-sky-600 ml-auto"
+              className="p-1.5 w-1/2 rounded-lg border  outline-none focus:border-sky-600 ml-auto"
               placeholder="Search"
             />
-            <button className="ml-1 mr-1">
+            <button className="ml-1 mr-4">
               <img src={search} alt="search" />
             </button>
           </>
