@@ -4,6 +4,7 @@ import logo from "../assets/logo.png";
 import login_img from "../assets/login-img.svg";
 import Footer from "../components/Footer";
 import CompanyInput from "../components/CompanyInput";
+import UserInput from "../components/UserInput";
 
 function Signup() {
   const navigate = useNavigate();
@@ -13,6 +14,10 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [company, setCompany] = useState(false);
+  const [type, setType] = useState("");
+  const [degree, setDescription] = useState("");
+  const [description, setDegree] = useState("");
+  const [experience, setExperience] = useState("");
 
   const submit = (e) => {
     e.preventDefault();
@@ -89,18 +94,34 @@ function Signup() {
               className="p-3 my-2 w-3/4  border border-black outline-none focus:border-sky-600 "
               placeholder="Password"
             />
+
+            {company ? (
+              <CompanyInput
+                type={type}
+                setType={setType}
+                description={description}
+                setDescription={setDescription}
+              />
+            ) : (
+              <UserInput
+                degree={degree}
+                setDegree={setDegree}
+                experience={experience}
+                setExperience={setExperience}
+              />
+            )}
             <div className=" w-3/4 m-auto flex  ">
               <input
                 type="checkbox"
                 id="isCompany"
-                onChange={(e) => {setCompany(!company)}}  
+                onChange={(e) => {
+                  setCompany(!company);
+                }}
               />
               <label htmlFor="isCompany" className=" p-1">
                 Company
               </label>
             </div>
-            {company&&<CompanyInput/>}
-
             <p className=" m-auto md:text-left w-3/4   text-sm">
               By clicking Agree & Join, you agree to the LinkedIn User
               Agreement, Privacy Policy, and Cookie Policy.
