@@ -1,10 +1,13 @@
 import React from "react";
 import Nav from "../components/Nav";
+import { useState } from "react";
 
 function Home() {
+  const [active, setActive] = useState("home");
+
   return (
     <>
-      <Nav />
+      <Nav active={active} setActive={setActive}/>
     </>
   );
 }
