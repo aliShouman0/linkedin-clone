@@ -11,9 +11,9 @@ function Home() {
   return (
     <>
       <Nav active={active} setActive={setActive} />
-      <main className="flex w-full h-screen justify-between">
+      <main className="flex w-full  justify-between">
         <LeftPanel />
-        <Feed />
+        {active === "home" ? <Feed /> : ""}
         <Search />
       </main>
     </>
