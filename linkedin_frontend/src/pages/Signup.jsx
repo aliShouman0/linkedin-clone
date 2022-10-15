@@ -3,14 +3,16 @@ import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import login_img from "../assets/login-img.svg";
 import Footer from "../components/Footer";
+import CompanyInput from "../components/CompanyInput";
 
 function Signup() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
-  const [phone, setphone] = useState("");
+  const [date, setdate] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
+  const [company, setCompany] = useState(false);
 
   const submit = (e) => {
     e.preventDefault();
@@ -29,7 +31,7 @@ function Signup() {
       // setLoad(false);
       return;
     }
-    if (!phone) {
+    if (!date) {
       setError(true);
       // setdisabled(false);
       // setLoad(false);
@@ -42,14 +44,13 @@ function Signup() {
       return;
     }
     setName("");
-    setphone("");
+    setdate("");
     setEmail("");
     setPassword("");
-    // e_learning.login(email, password, setError, setdisabled, navigate);
+    //  .login(email, password, setError, setdisabled, navigate);
   };
-
   return (
-    <div className="container flex flex-col h-screen justify-between">
+    <div className="container flex flex-col h-screen justify-between overflow-x-hidden">
       <header className="h-20 w-28">
         <img src={logo} alt="logo" className="h-14 w-28" />
       </header>
@@ -61,30 +62,45 @@ function Signup() {
           <form className="m-1 mx-auto " onSubmit={(e) => submit(e)}>
             <input
               type="text"
+              value={name}
               className=" p-3 my-2 w-3/4  border border-black outline-none focus:border-sky-600 "
               placeholder="Name"
               onChange={(e) => setName(e.target.value)}
             />
             <input
               type="Email"
+              value={email}
               className=" p-3 my-2 w-3/4  border border-black outline-none focus:border-sky-600 "
               placeholder="Email"
               onChange={(e) => setEmail(e.target.value)}
             />
 
             <input
-              type="number"
+              type="date"
+              value={date}
               className=" p-3 my-2 w-3/4  border border-black outline-none focus:border-sky-600 "
-              placeholder="Phone"
-              onChange={(e) => setphone(e.target.value)}
+              onChange={(e) => setdate(e.target.value)}
             />
 
             <input
               type="password"
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="p-3 my-2 w-3/4  border border-black outline-none focus:border-sky-600 "
               placeholder="Password"
             />
+            <div className=" w-3/4 m-auto flex  ">
+              <input
+                type="checkbox"
+                id="isCompany"
+                onChange={(e) => {setCompany(!company)}}  
+              />
+              <label htmlFor="isCompany" className=" p-1">
+                Company
+              </label>
+            </div>
+            {company&&<CompanyInput/>}
+
             <p className=" m-auto md:text-left w-3/4   text-sm">
               By clicking Agree & Join, you agree to the LinkedIn User
               Agreement, Privacy Policy, and Cookie Policy.

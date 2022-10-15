@@ -29,7 +29,7 @@ function Login() {
     }
     setEmail("");
     setPassword("");
-    // e_learning.login(email, password, setError, setdisabled, navigate);
+    //.login(email, password, setError, setdisabled, navigate);
   };
 
   return (
@@ -45,14 +45,14 @@ function Login() {
           <form className="m-3 mx-auto " onSubmit={(e) => submit(e)}>
             <input
               type="text"
-              id="floating_filled"
+              value={email}
               className=" p-3 my-2 w-3/4  border border-black outline-none focus:border-sky-600 "
               placeholder="Email"
             />
 
             <input
               type="text"
-              id="floating_filled"
+              value={password}
               className="p-3 my-2 w-3/4  border border-black outline-none focus:border-sky-600 "
               placeholder="Password"
             />
