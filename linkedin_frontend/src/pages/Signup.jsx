@@ -19,6 +19,7 @@ function Signup() {
   const [degree, setDescription] = useState("");
   const [description, setDegree] = useState("");
   const [experience, setExperience] = useState("");
+  const [location, setLocation] = useState("");
 
   const submit = (e) => {
     e.preventDefault();
@@ -38,6 +39,12 @@ function Signup() {
       return;
     }
     if (!date) {
+      setError(true);
+      // setdisabled(false);
+      // setLoad(false);
+      return;
+    }
+    if (!location) {
       setError(true);
       // setdisabled(false);
       // setLoad(false);
@@ -73,20 +80,41 @@ function Signup() {
               placeholder="Name"
               onChange={(e) => setName(e.target.value)}
             />
-            <input
-              type="Email"
-              value={email}
-              className=" p-3 my-2 w-3/4  border border-black outline-none focus:border-sky-600 "
-              placeholder="Email"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-
-            <input
-              type="date"
-              value={date}
-              className=" p-3 my-2 w-3/4  border border-black outline-none focus:border-sky-600 "
-              onChange={(e) => setdate(e.target.value)}
-            />
+            <div className="flex w-3/4  m-auto   justify-around">
+              <input
+                type="Email"
+                value={email}
+                className=" p-3 my-2 w-1/4   border border-black outline-none focus:border-sky-600 "
+                placeholder="Email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                type="text"
+                value={location}
+                className=" p-3 my-2 w-1/4   border border-black outline-none focus:border-sky-600 "
+                placeholder="Location"
+                onChange={(e) => setLocation(e.target.value)}
+              />
+              <input
+                type="date"
+                value={date}
+                className=" p-3 my-2 w-1/4 text-sm border border-black outline-none focus:border-sky-600 "
+                onChange={(e) => setdate(e.target.value)}
+              />
+                <label
+                htmlFor="photo"
+                className=" cursor-pointer flex flex-col items-center my-auto"
+              >
+                <input
+                  type="file"
+                  id="photo"
+                  className="hidden"
+                  onChange={(e) => {}}
+                />
+                <img src={camera} alt="camera" className=" h-5 w-5" />
+                Add Photo
+              </label>
+            </div>
 
             <input
               type="password"
@@ -125,19 +153,7 @@ function Signup() {
                 </label>
               </div>
 
-              <label
-                htmlFor="photo"
-                className=" p-1 cursor-pointer flex flex-col items-center"
-              >
-                <input
-                  type="file"
-                  id="photo"
-                  className="hidden"
-                  onChange={(e) => {}}
-                />
-                <img src={camera} alt="camera" className=" h-7 w-7" />
-                Add Photo
-              </label>
+            
             </div>
             <p className=" m-auto md:text-left w-3/4   text-sm">
               By clicking Agree & Join, you agree to the LinkedIn User
