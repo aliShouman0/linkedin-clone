@@ -15,7 +15,11 @@ function Company() {
       >
         Post a Job
       </button>
-  
+      {addJob && <AddJob close={setAddJob} />}
+      <Job name={"SE"} photo={"NA"} description={test} title="Full Stack" isCompany={true} />
+      <Job name={"SE"} photo={"NA"} description={test} title="Full Stack" isCompany={true} />
+      <Job name={"SE"} photo={"NA"} description={test} title="Full Stack" isCompany={true} />
+      <Job name={"SE"} photo={"NA"} description={test} title="Full Stack" isCompany={true} />
 
     </div>
   );
