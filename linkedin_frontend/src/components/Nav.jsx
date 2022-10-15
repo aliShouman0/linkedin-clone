@@ -12,7 +12,7 @@ function Nav({ active, setActive }) {
       <img src={logo} alt="logo" className="h-12 w-20 ml-4  " />
       <div>
         <button
-          className={`text-sm mx-1 p-2  rounded-sm  ${
+          className={`text-sm mx-1 p-2  rounded-sm w-28 ${
             active === "home" ? "bg-gray-300   border-b-2 border-black" : ""
           }`}
           onClick={() => setActive("home")}
@@ -22,7 +22,7 @@ function Nav({ active, setActive }) {
         </button>
 
         <button
-          className={`text-sm mx-1 p-2 rounded-sm  ${
+          className={`text-sm mx-1 p-2 rounded-sm w-28  ${
             active === "notification"
               ? "bg-gray-300   border-b-2 border-black"
               : ""
@@ -39,8 +39,8 @@ function Nav({ active, setActive }) {
         </button>
 
         <button
-          className={`text-sm mx-1 p-2 rounded-sm ${
-            active === "profile" ? "bg-gray-300   border-b-2 border-black" : ""
+          className={`text-sm mx-1 p-2 rounded-sm w-28 ${
+            active === "profile" ? "bg-gray-300   border-b-2 border-black " : ""
           }`}
           onClick={() => setActive("profile")}
         >

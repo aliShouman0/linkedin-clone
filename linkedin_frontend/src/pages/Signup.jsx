@@ -5,6 +5,7 @@ import login_img from "../assets/login-img.svg";
 import Footer from "../components/Footer";
 import CompanyInput from "../components/CompanyInput";
 import UserInput from "../components/UserInput";
+import camera from "../assets/camera.svg";
 
 function Signup() {
   const navigate = useNavigate();
@@ -111,15 +112,31 @@ function Signup() {
               />
             )}
             <div className=" w-3/4 m-auto flex  ">
-              <input
-                type="checkbox"
-                id="isCompany"
-                onChange={(e) => {
-                  setCompany(!company);
-                }}
-              />
-              <label htmlFor="isCompany" className=" p-1">
-                Company
+              <div className=" flex  items-center">
+                <input
+                  type="checkbox"
+                  id="isCompany"
+                  onChange={(e) => {
+                    setCompany(!company);
+                  }}
+                />
+                <label htmlFor="isCompany" className=" p-1">
+                  Company
+                </label>
+              </div>
+
+              <label
+                htmlFor="photo"
+                className=" p-1 cursor-pointer flex flex-col items-center"
+              >
+                <input
+                  type="file"
+                  id="photo"
+                  className="hidden"
+                  onChange={(e) => {}}
+                />
+                <img src={camera} alt="camera" className=" h-7 w-7" />
+                Add Photo
               </label>
             </div>
             <p className=" m-auto md:text-left w-3/4   text-sm">
