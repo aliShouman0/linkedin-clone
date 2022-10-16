@@ -1,15 +1,17 @@
 const express = require("express");
-//require('dotenv').config();
+require("dotenv").config();
+require("./config/database.config");
+const usersRoute = require("./routes/jobs.route");
+const authRoutes = require('./routes/auth.route');
+
 const app = express();
- require('./config/database.config');
 
 app.use(express.json());
-const usersRoute = require("./routes/users.route");
 
 app.use("/jobs", usersRoute);
+app.use('/auth', authRoutes)
 
-app.listen(8000, (err) => {
-  if (err) console.log(err);
-  console.log("Server started at port 8000");
- 
+app.listen(process.env.PORT, (err) => {
+  if (err) throw err;
+  console.log(`server running on port ${process.env.PORT}`);
 });

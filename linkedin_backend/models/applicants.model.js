@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const applicantSchema = mongoose.Schema({
+const applicantSchema = new mongoose.Schema({
   user_id: {
     type: String,
     required: "user id is required",
@@ -8,7 +8,7 @@ const applicantSchema = mongoose.Schema({
   job_id: {
     type: String,
     required: "job id is required",
-  } 
+  },
 });
 
 const model = mongoose.model("Applicant", applicantSchema);

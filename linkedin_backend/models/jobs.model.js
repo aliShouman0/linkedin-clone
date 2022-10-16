@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const jobSchema = mongoose.Schema({
+const jobSchema =new  mongoose.Schema({
   company_id: {
     type: String,
     required: "company_id is required",

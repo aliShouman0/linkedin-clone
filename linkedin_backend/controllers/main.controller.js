@@ -1,4 +1,3 @@
-const userModel = require("../models/users.model");
 const jobModel = require("../models/jobs.model");
 
 const getAllJobs = async (req, res) => {
@@ -9,8 +8,8 @@ const getAllJobs = async (req, res) => {
 const getJob = async (req, res) => {
   const { id } = req.params;
   console.log(id);
-    jobModel.find( {id} ).then((job) => res.send(job));
-}; 
+  jobModel.find({ id }).then((job) => res.send(job));
+};
 
 const addJob = async (req, res) => {
   await jobModel
@@ -19,23 +18,21 @@ const addJob = async (req, res) => {
     .catch((err) => res.status(400).send("Error"));
 };
 
-const updateUser = async (req, res) => {
-  const { id } = req.body;
-  jobModel
-    .findByIdAndUpdate(id, req.body)
-    .then((user) => res.send(user))
-    .catch((err) => res.status(400).send(err));
-};
+// const updateUser = async (req, res) => {
+//   const { id } = req.body;
+//   jobModel
+//     .findByIdAndUpdate(id, req.body)
+//     .then((user) => res.send(user))
+//     .catch((err) => res.status(400).send(err));
+// };
 
-const deleteUser = async (req, res) => {
-  const { id } = req.body;
-  jobModel.findByIdAndRemove(id).then((user) => res.send(user));
-};
+// const deleteUser = async (req, res) => {
+//   const { id } = req.body;
+//   jobModel.findByIdAndRemove(id).then((user) => res.send(user));
+// };
 
 module.exports = {
   getAllJobs,
   getJob,
   addJob,
-  updateUser,
-  deleteUser,
 };

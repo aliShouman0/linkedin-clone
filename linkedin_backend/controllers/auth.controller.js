@@ -1,9 +1,47 @@
-const express = require("express");
+const User = require("../models/users.model");
+// const bcrypt = require('bcrypt');
+// const jwt = require('jsonwebtoken');
 
-const app = express();
-app.use(express.json());
+const login = async (req, res) => {
+  res.send("login");
+};
+const signup = async (req, res) => {
+  const {
+    name,
+    email,
+    location,
+    date,
+    photo,
+    user_type,
+    password,
+    degree,
+    experience,
+    company_type,
+    description,
+  } = req.body;
+  try {
+    const user = new User();
+    user.name = name;
+    user.email = email;
+    user.location = location;
+    user.photo = "NA";
+    user.user_type = user_type;
+    user.password = await bcrypt.hash(password, 10);
+    user.degree = degree;
+    user.experience = experience;
+    user.company_type = company_type;
+    user.description = description;
 
-app.listen(process.env.PORT, (err) => {
-  if (err) throw err;
-  console.log(`server running on port ${process.env.PORT}`);
-});
+    await user.save();
+    res.json(user);
+  } catch (err) {
+    res.status(400).json({
+      message: err.message,
+    });
+  }
+};
+
+module.exports = {
+  login,
+  signup,
+};
