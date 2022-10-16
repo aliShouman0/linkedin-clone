@@ -17,7 +17,7 @@ const login = async (req, res) => {
     { email: user.email, name: user.name, userType: user.user_type },
     process.env.JWT_SECRET_KEY,
     {
-      expiresIn: "30m",
+      expiresIn: "2h",
     }
   );
   res.status(200).json({user ,token});

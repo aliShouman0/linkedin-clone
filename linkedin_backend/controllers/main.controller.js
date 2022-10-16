@@ -1,12 +1,26 @@
 const jobModel = require("../models/jobs.model");
 const applicantModel = require("../models/applicants.model");
 
+const map = (obb) => {
+  let arr = [];
+  obb.forEach((element, i) => {
+    arr[i] = element.job_id;
+  });
+  return arr;
+};
+
 const getAllJobs = async (req, res) => {
-  const { id } = req.user;
-  const applied = await applicantModel.find({ user_id: id });
-  console.log("applied ", applied, id);
-  //const jobs = await jobModel.find();
-  res.send("jobs");
+  const { _id } = req.user;
+  const applied = await applicantModel.find({ user_id: _id }).select("job_id");
+  console.log(
+    "applied ",
+    applied.map((job) => job.job_id)
+  );
+  var result = map(applied);
+  const jobs = await jobModel.find({
+    _id: { $nin: result },
+  });
+  res.send(jobs);
 };
 
 const getJob = async (req, res) => {
@@ -25,7 +39,7 @@ const addJob = async (req, res) => {
 const applyForJob = async (req, res) => {
   const { _id } = req.user;
   const { job_id } = req.body;
-   console.log(job_id );
+  console.log(job_id);
   await applicantModel
     .create({ user_id: _id, job_id: job_id })
     .then((applicant) => res.send(applicant))
