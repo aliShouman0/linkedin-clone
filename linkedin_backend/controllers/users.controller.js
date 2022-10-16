@@ -1,13 +1,15 @@
 const userModel = require("../models/users.model");
 const followModel = require("../models/follows.model");
+const bcrypt = require("bcrypt");
 
-// const updateUser = async (req, res) => {
-//   const { id } = req.body;
-//   jobModel
-//     .findByIdAndUpdate(id, req.body)
-//     .then((user) => res.send(user))
-//     .catch((err) => res.status(400).send(err));
-// };
+const updateUser = async (req, res) => {
+  const { _id } = req.user;
+  password = await bcrypt.hash(req.body.password, 10);
+  userModel
+    .findByIdAndUpdate(_id, { ...req.body, password })
+    .then((user) => res.send(user))
+    .catch((err) => res.status(400).send(err));
+};
 
 const getUser = async (req, res) => {
   const { id } = req.params;
@@ -35,4 +37,5 @@ module.exports = {
   getUser,
   follow,
   isfollow,
+  updateUser,
 };
