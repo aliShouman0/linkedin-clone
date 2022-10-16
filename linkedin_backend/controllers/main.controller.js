@@ -8,17 +8,34 @@ const getAllJobs = async (req, res) => {
 
 const getJob = async (req, res) => {
   const { id } = req.params;
-  const job = await jobModel.find({ id });
-  res.send(job);
-};
+  console.log(id);
+    jobModel.find( {id} ).then((job) => res.send(job));
+}; 
 
 const addJob = async (req, res) => {
-  const job = await jobModel.find(req.body);
-  res.send(job);
+  await jobModel
+    .create(req.body)
+    .then((user) => res.send(user))
+    .catch((err) => res.status(400).send("Error"));
+};
+
+const updateUser = async (req, res) => {
+  const { id } = req.body;
+  jobModel
+    .findByIdAndUpdate(id, req.body)
+    .then((user) => res.send(user))
+    .catch((err) => res.status(400).send(err));
+};
+
+const deleteUser = async (req, res) => {
+  const { id } = req.body;
+  jobModel.findByIdAndRemove(id).then((user) => res.send(user));
 };
 
 module.exports = {
   getAllJobs,
   getJob,
   addJob,
+  updateUser,
+  deleteUser,
 };
