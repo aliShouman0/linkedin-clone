@@ -39,7 +39,6 @@ const addJob = async (req, res) => {
 const applyForJob = async (req, res) => {
   const { _id } = req.user;
   const { job_id } = req.body;
-  console.log(job_id);
   await applicantModel
     .create({ user_id: _id, job_id: job_id })
     .then((applicant) => res.send(applicant))
