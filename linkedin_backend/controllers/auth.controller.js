@@ -24,9 +24,10 @@ const signup = async (req, res) => {
     user.name = name;
     user.email = email;
     user.location = location;
+    user.date = date;
     user.photo = "NA";
     user.user_type = user_type;
-    user.password = await bcrypt.hash(password, 10);
+    user.password = password;
     user.degree = degree;
     user.experience = experience;
     user.company_type = company_type;
@@ -45,3 +46,4 @@ module.exports = {
   login,
   signup,
 };
+

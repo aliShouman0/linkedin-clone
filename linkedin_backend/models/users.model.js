@@ -24,9 +24,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: "user_type is required",
   },
-  pasword: {
+  password: {
     type: String,
-    required: "pasword is required",
+    required: "password is required",
   },
   degree: String,
   experience: String,
