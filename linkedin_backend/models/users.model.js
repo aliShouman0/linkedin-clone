@@ -7,32 +7,28 @@ const userSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: "name is email",
+    required: "email is required",
   },
   location: {
     type: String,
-    required: "name is location",
+    required: "location is required",
   },
   date: {
     type: String,
-    required: "name is location",
+    required: "date is required",
   },
-  photo: {
-    type: String,
-    required: "name is photo",
-  },
+  photo: String,
   pasword: {
     type: String,
-    required: "name is pasword",
+    required: "pasword is required",
   },
   degree: String,
   experience: String,
 
   type: String,
   description: String,
-
 });
 
-const model = mongoose.model("user", userSchema);
+const model = mongoose.model("User", userSchema);
 
 module.exports = model;

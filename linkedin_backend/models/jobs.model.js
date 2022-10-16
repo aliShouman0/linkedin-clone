@@ -3,18 +3,18 @@ const mongoose = require("mongoose");
 const jobSchema = mongoose.Schema({
   company_id: {
     type: String,
-    required: "name is company_id",
+    required: "company_id is required",
   },
   title: {
     type: String,
-    required: "name is title",
+    required: "title is required",
   },
   description: {
     type: String,
-    required: "name is description",
+    required: "description is required",
   },
 });
 
-const model = mongoose.model("jobs", jobSchema);
+const model = mongoose.model("Job", jobSchema);
 
 module.exports = model;
