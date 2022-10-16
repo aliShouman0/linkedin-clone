@@ -1,6 +1,7 @@
 const jobModel = require("../models/jobs.model");
 
 const getAllJobs = async (req, res) => {
+  console.log("hi2");
   const jobs = await jobModel.find();
   res.send(jobs);
 };
