@@ -1,10 +1,28 @@
 const User = require("../models/users.model");
-// const bcrypt = require('bcrypt');
-// const jwt = require('jsonwebtoken');
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const login = async (req, res) => {
-  res.send("login");
+  const { email, password } = req.body;
+   
+  const user = await User.findOne({ email }).select("+password");
+
+  if (!user) return res.status(404).json({ message: "Invalid Credentials" });
+
+  const isMatch = await bcrypt.compare(password, user.password);
+
+  if (!isMatch) return res.status(404).json({ message: "Invalid Credentials" });
+
+  const token = jwt.sign(
+    { email: user.email, name: user.name, userType: 1 },
+    process.env.JWT_SECRET_KEY,
+    {
+      expiresIn: "30m",
+    }
+  );
+  res.status(200).json({user ,token});
 };
+
 const signup = async (req, res) => {
   const {
     name,
@@ -27,7 +45,7 @@ const signup = async (req, res) => {
     user.date = date;
     user.photo = "NA";
     user.user_type = user_type;
-    user.password = password;
+    user.password = await bcrypt.hash(password, 10)
     user.degree = degree;
     user.experience = experience;
     user.company_type = company_type;
@@ -46,4 +64,3 @@ module.exports = {
   login,
   signup,
 };
-
