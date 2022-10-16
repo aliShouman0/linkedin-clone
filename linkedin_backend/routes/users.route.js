@@ -4,12 +4,14 @@ const {
   follow,
   isfollow,
   updateUser,
+  getNotification
 } = require("../controllers/users.controller");
 const guard = require("../middlewares/auth.middleware");
 const router = Router();
 
-router.post("/", guard, updateUser);
-router.get("/:id", guard, getUser);
+router.put("/", guard, updateUser);
+//router.get("/getUser/:id", guard, getUser);
+router.get("/getNotification", guard, getNotification);
 router.post("/follow", guard, follow);
 router.get("/isfollow/:company_id", guard, isfollow);
 

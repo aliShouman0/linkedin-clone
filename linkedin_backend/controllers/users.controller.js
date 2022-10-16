@@ -1,5 +1,6 @@
 const userModel = require("../models/users.model");
 const followModel = require("../models/follows.model");
+const jobModel = require("../models/jobs.model");
 const bcrypt = require("bcrypt");
 
 const updateUser = async (req, res) => {
@@ -33,9 +34,30 @@ const isfollow = async (req, res) => {
     .findOne({ user_id: _id, company_id })
     .then((job) => res.send(job));
 };
+
+const map = (obb) => {
+  let arr = [];
+  obb.forEach((element, i) => {
+    arr[i] = element.company_id;
+  });
+  return arr;
+};
+
+const getNotification = async (req, res) => {
+  const { _id } = req.user;
+  const follows = await followModel.find({ user_id: _id }).select("company_id");
+  let result = map(follows);
+  console.log(follows);
+  const notification = await jobModel.find({
+    company_id: { $in: result },
+  });
+  res.send(notification);
+};
+
 module.exports = {
   getUser,
   follow,
   isfollow,
   updateUser,
+  getNotification,
 };

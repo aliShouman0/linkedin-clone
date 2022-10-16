@@ -11,12 +11,9 @@ const map = (obb) => {
 
 const getAllJobs = async (req, res) => {
   const { _id } = req.user;
+  console.log("a", req.user);
   const applied = await applicantModel.find({ user_id: _id }).select("job_id");
-  console.log(
-    "applied ",
-    applied.map((job) => job.job_id)
-  );
-  var result = map(applied);
+  let result = map(applied);
   const jobs = await jobModel.find({
     _id: { $nin: result },
   });
