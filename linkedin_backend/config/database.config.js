@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-
+//process.env.DATABASE_URL
 mongoose
-  .connect(process.env.DATABASE_URL)
+  .connect("mongodb://127.0.0.1:27017/linkedin_db")
   .then(() => {
     console.log(":) database connected");
   })
