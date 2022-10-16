@@ -1,9 +1,12 @@
 const jobModel = require("../models/jobs.model");
+const applicantModel = require("../models/applicants.model");
 
 const getAllJobs = async (req, res) => {
-  console.log("hi2");
-  const jobs = await jobModel.find();
-  res.send(jobs);
+  const { id } = req.user;
+  const applied = await applicantModel.find({ user_id: id });
+  console.log("applied ", applied, id);
+  //const jobs = await jobModel.find();
+  res.send("jobs");
 };
 
 const getJob = async (req, res) => {
@@ -15,8 +18,18 @@ const getJob = async (req, res) => {
 const addJob = async (req, res) => {
   await jobModel
     .create(req.body)
-    .then((user) => res.send(user))
+    .then((job) => res.send(job))
     .catch((err) => res.status(400).send("Error"));
+};
+
+const applyForJob = async (req, res) => {
+  const { _id } = req.user;
+  const { job_id } = req.body;
+   console.log(job_id );
+  await applicantModel
+    .create({ user_id: _id, job_id: job_id })
+    .then((applicant) => res.send(applicant))
+    .catch((err) => res.status(400).send(err));
 };
 
 // const updateUser = async (req, res) => {
@@ -36,4 +49,5 @@ module.exports = {
   getAllJobs,
   getJob,
   addJob,
+  applyForJob,
 };
