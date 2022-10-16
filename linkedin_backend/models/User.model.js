@@ -18,6 +18,10 @@ const userSchema = new mongoose.Schema({
     required: "date is required",
   },
   photo: String,
+  user_type: {
+    type: String,
+    required: "user_type is required",
+  },
   pasword: {
     type: String,
     required: "pasword is required",
@@ -25,7 +29,7 @@ const userSchema = new mongoose.Schema({
   degree: String,
   experience: String,
 
-  type: String,
+  company_type: String,
   description: String,
 });
 
