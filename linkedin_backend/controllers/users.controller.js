@@ -23,7 +23,16 @@ const follow = async (req, res) => {
     .catch((err) => res.status(400).send(err));
 };
 
+const isfollow = async (req, res) => {
+  const { company_id } = req.params;
+  const { _id } = req.user;
+
+  await followModel
+    .findOne({ user_id: _id, company_id })
+    .then((job) => res.send(job));
+};
 module.exports = {
   getUser,
   follow,
+  isfollow,
 };
