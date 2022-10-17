@@ -6,6 +6,8 @@ import Footer from "../components/Footer";
 import CompanyInput from "../components/CompanyInput";
 import UserInput from "../components/UserInput";
 import camera from "../assets/camera.svg";
+import loadImg from "../assets/load20.gif";
+import main from "../main";
 
 function Signup() {
   const navigate = useNavigate();
@@ -20,48 +22,18 @@ function Signup() {
   const [degree, setDegree] = useState("");
   const [experience, setExperience] = useState("");
   const [location, setLocation] = useState("");
+  const [load, setLoad] = useState(false);
+  const [photo, setphoto] = useState("NA");
 
-  const submit = (e) => {
-    e.preventDefault();
-    // setLoad(true);
-    // setdisabled(true);
-    setError(false);
-    if (!email) {
-      setError(true);
-      // setdisabled(false);
-      // setLoad(false);
-      return;
-    }
-    if (!name) {
-      setError(true);
-      // setdisabled(false);
-      // setLoad(false);
-      return;
-    }
-    if (!date) {
-      setError(true);
-      // setdisabled(false);
-      // setLoad(false);
-      return;
-    }
-    if (!location) {
-      setError(true);
-      // setdisabled(false);
-      // setLoad(false);
-      return;
-    }
-    if (!password) {
-      setError(true);
-      // setdisabled(false);
-      // setLoad(false);
-      return;
-    }
-    setName("");
-    setdate("");
-    setEmail("");
-    setPassword("");
-    //  .login(email, password, setError, setdisabled, navigate);
-  };
+
+
+  if (load) {
+    return (
+      <div className="fixed top-0 left-0 w-screen h-screen">
+        <img src={loadImg} alt="loadImg" className="w-screen h-screen" />
+      </div>
+    );
+  }
   return (
     <div className="container flex flex-col h-screen justify-between overflow-x-hidden">
       <header className="h-20 w-28">
@@ -101,7 +73,7 @@ function Signup() {
                 className=" p-3 my-2 w-1/4 text-sm border border-black outline-none focus:border-sky-600 "
                 onChange={(e) => setdate(e.target.value)}
               />
-                <label
+              <label
                 htmlFor="photo"
                 className=" cursor-pointer flex flex-col items-center my-auto"
               >
@@ -152,8 +124,6 @@ function Signup() {
                   Company
                 </label>
               </div>
-
-            
             </div>
             <p className=" m-auto md:text-left w-3/4   text-sm">
               By clicking Agree & Join, you agree to the LinkedIn User
@@ -165,8 +135,7 @@ function Signup() {
               </p>
             )}
             <input
-              type={"submit"}
-              // disabled={disabled}
+              type={"submit"} 
               value="Agree & Join"
               className="bg-sky-600 text-white px-5 py-3 rounded-full my-3  w-3/4 cursor-pointer"
             />
