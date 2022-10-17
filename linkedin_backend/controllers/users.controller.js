@@ -11,11 +11,7 @@ const updateUser = async (req, res) => {
     .then((user) => res.send(user))
     .catch((err) => res.status(400).send(err));
 };
-
-const getUser = async (req, res) => {
-  const { id } = req.params;
-  userModel.findOne({ _id: id }).then((user) => res.send(user));
-};
+ 
 
 const follow = async (req, res) => {
   const { _id } = req.user;
@@ -47,7 +43,6 @@ const getNotification = async (req, res) => {
   const { _id } = req.user;
   const follows = await followModel.find({ user_id: _id }).select("company_id");
   let result = map(follows);
-  console.log(follows);
   const notification = await jobModel.find({
     company_id: { $in: result },
   });

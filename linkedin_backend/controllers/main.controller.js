@@ -20,10 +20,10 @@ const getAllJobs = async (req, res) => {
   res.send(jobs);
 };
 
-const getJob = async (req, res) => {
-  const { id } = req.params;
-  console.log(id);
-  jobModel.find({ id }).then((job) => res.send(job));
+const getApplicant = async (req, res) => {
+  const { id } = req.params; 
+  applicantModel.find({job_id: id }).select("user_id").then((job) => res.send(job));
+  res.send(job)
 };
 
 const addJob = async (req, res) => {
@@ -42,6 +42,13 @@ const applyForJob = async (req, res) => {
     .catch((err) => res.status(400).send(err));
 };
 
+const getApplicants = async (req, res) => {
+  const { _id } = req.user;
+  console.log(_id)
+  const jobs = await jobModel.find({ company_id: _id });
+  res.send(jobs);
+};
+
 // const updateUser = async (req, res) => {
 //   const { id } = req.body;
 //   jobModel
@@ -56,8 +63,9 @@ const applyForJob = async (req, res) => {
 // };
 
 module.exports = {
-  getAllJobs,
-  getJob,
+  getAllJobs, 
   addJob,
   applyForJob,
+  getApplicants,
+  getApplicant
 };
