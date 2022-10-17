@@ -4,6 +4,7 @@ import logo from "../assets/logo.png";
 import login_img from "../assets/login-img.svg";
 import Footer from "../components/Footer";
 import loadImg from "../assets/load22.gif";
+import main from "../main";
 
 function Login() {
   const navigate = useNavigate();
@@ -26,9 +27,9 @@ function Login() {
       setLoad(false);
       return;
     }
-    setEmail("");
-    setPassword("");
-    //main.login(email, password, setError, navigate);
+    // setEmail("");
+    // setPassword("");
+    main.login(email, password, setError, setLoad,navigate);
   };
 
   return (
@@ -48,7 +49,7 @@ function Login() {
           </h1>
           <form className="m-3 mx-auto " onSubmit={(e) => submit(e)}>
             <input
-              type="text"
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className=" p-3 my-2 w-3/4  border border-black outline-none focus:border-sky-600 "

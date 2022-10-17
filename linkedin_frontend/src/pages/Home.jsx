@@ -8,10 +8,14 @@ import Company from "../components/Company";
 import Search from "../components/Search";
 import Notification from "../components/Notification";
 import Profile from "../components/Profile";
+import { useLocation } from "react-router-dom";
 
 function Home() {
+  const location = useLocation();
+
   const [active, setActive] = useState("home");
-  const [isCompany, setIsCompany] = useState(true);
+  const [isCompany, setIsCompany] = useState(location.state.isCompany);
+  console.log(isCompany, location.state.isCompany);
 
   return (
     <>
@@ -23,7 +27,7 @@ function Home() {
         {active === "applicant" ? <Applicant /> : ""}
         {active === "notification" ? <Notification /> : ""}
         {active === "profile" ? <Profile /> : ""}
-        {!isCompany &&active !== "profile"&& <Search />}
+        {!isCompany && active !== "profile" && <Search />}
       </main>
     </>
   );

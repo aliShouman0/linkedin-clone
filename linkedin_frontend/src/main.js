@@ -43,6 +43,7 @@ main.postAPI = async (api_url, api_data, api_token = null) => {
     main.Console("Error from POST API", error);
   }
 };
+
 main.signup = async (
   email,
   password,
@@ -88,6 +89,34 @@ main.logout = async (navigate) => {
   navigate("/login");
 };
 
+// login if login not valid set error/
+//apply anmition login load
+main.login = async (email, password, setError, setLoad, navigate) => {
+  const url = `${main.baseUrl}auth/login`;
+  const data = { email, password };
+  const result = await main.postAPI(url, data);
+  setLoad(false);
+  if (result && result.status === 200) {
+    const user = result.data;
+    const user_type = user.user.user_type;
+
+    localStorage.setItem("access_token", user.token);
+    localStorage.setItem("user_info", JSON.stringify(user.user));
+
+    if (user_type === "company") {
+      navigate("/home", { state: { isCompany: true } });
+      console.log("company");
+    } else {
+      console.log("no company");
+
+      navigate("/home", { state: { isCompany: false } });
+    }
+    return;
+  }
+  setError(true);
+  setLoad(false);
+};
+
 // check if login by checking data in  localStorage
 // check if user are login in and chck if token are valid
 main.checkLogin = async (navigate, setIsLogin = null, fromLogin = false) => {
@@ -120,39 +149,37 @@ main.checkLogin = async (navigate, setIsLogin = null, fromLogin = false) => {
   }
 };
 
-// login if login not valid set error/while testing data  setdisabled for login and
-//apply anmition login
-main.login = async (email, password, setError, setdisabled, navigate) => {
-  const data = new FormData();
-  const url = `${main.baseUrl}login`;
-  data.append("email", email);
-  data.append("password", password);
-  const login_info = await main.postAPI(url, data);
-  if (login_info.status && login_info.status === 200) {
-    // if done save toke and get user info by api
-    const access_token = login_info.data.access_token;
-    localStorage.setItem("access_token", access_token);
-    // get user info
-    const user_info_url = `${main.baseUrl}me`;
-    // this api need token
-    const api_userInfo = new FormData();
-    api_userInfo.append("token", access_token);
-    const user_info = await main.postAPI(user_info_url, api_userInfo);
-    //  if token valid will get user info and save in local storage then redirect to home page
-    if (user_info.status && user_info.status === 200) {
-      localStorage.setItem("user_info", JSON.stringify(user_info.data));
-      navigate("/student");
-    } else {
-      localStorage.removeItem("access_token");
-      localStorage.removeItem("user_info");
-      setError(true);
-      setdisabled(false);
-    }
-  } else {
-    setError(true);
-    setdisabled(false);
-  }
-};
+// main.login = async (email, password, setError, setdisabled, navigate) => {
+//   const data = new FormData();
+//   const url = `${main.baseUrl}login`;
+//   data.append("email", email);
+//   data.append("password", password);
+//   const login_info = await main.postAPI(url, data);
+//   if (login_info.status && login_info.status === 200) {
+//     // if done save toke and get user info by api
+//     const access_token = login_info.data.access_token;
+//     localStorage.setItem("access_token", access_token);
+//     // get user info
+//     const user_info_url = `${main.baseUrl}me`;
+//     // this api need token
+//     const api_userInfo = new FormData();
+//     api_userInfo.append("token", access_token);
+//     const user_info = await main.postAPI(user_info_url, api_userInfo);
+//     //  if token valid will get user info and save in local storage then redirect to home page
+//     if (user_info.status && user_info.status === 200) {
+//       localStorage.setItem("user_info", JSON.stringify(user_info.data));
+//       navigate("/student");
+//     } else {
+//       localStorage.removeItem("access_token");
+//       localStorage.removeItem("user_info");
+//       setError(true);
+//       setdisabled(false);
+//     }
+//   } else {
+//     setError(true);
+//     setdisabled(false);
+//   }
+// };
 
 //get all Announcements for specific Course
 main.getAnnouncements = (course_nb) =>
