@@ -11,7 +11,6 @@ const map = (obb) => {
 
 const getAllJobs = async (req, res) => {
   const { _id } = req.user;
-  console.log("a", req.user);
   const applied = await applicantModel.find({ user_id: _id }).select("job_id");
   let result = map(applied);
   const jobs = await jobModel.find({
@@ -21,9 +20,18 @@ const getAllJobs = async (req, res) => {
 };
 
 const getApplicant = async (req, res) => {
-  const { id } = req.params; 
-  applicantModel.find({job_id: id }).select("user_id").then((job) => res.send(job));
-  res.send(job)
+  const { id } = req.params;
+  applicantModel
+    .find({ job_id: id })
+    .select("user_id")
+    .then((job) => res.send(job));
+  res.send(job);
+};
+
+const getMyJobs = async (req, res) => {
+  const { _id } = req.user;
+  const job = await jobModel.find({ company_id: _id });
+  res.send(job);
 };
 
 const addJob = async (req, res) => {
@@ -44,28 +52,16 @@ const applyForJob = async (req, res) => {
 
 const getApplicants = async (req, res) => {
   const { _id } = req.user;
-  console.log(_id)
+  console.log(_id);
   const jobs = await jobModel.find({ company_id: _id });
   res.send(jobs);
 };
 
-// const updateUser = async (req, res) => {
-//   const { id } = req.body;
-//   jobModel
-//     .findByIdAndUpdate(id, req.body)
-//     .then((user) => res.send(user))
-//     .catch((err) => res.status(400).send(err));
-// };
-
-// const deleteUser = async (req, res) => {
-//   const { id } = req.body;
-//   jobModel.findByIdAndRemove(id).then((user) => res.send(user));
-// };
-
 module.exports = {
-  getAllJobs, 
+  getAllJobs,
   addJob,
   applyForJob,
   getApplicants,
-  getApplicant
+  getApplicant,
+  getMyJobs,
 };

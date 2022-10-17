@@ -14,7 +14,7 @@ const updateUser = async (req, res) => {
 
 const getUser = async (req, res) => {
   const { id } = req.params;
-  userModel.findOne({ _id: id }).then((user) => res.send(user));
+  userModel.find({company_id: id }).then((user) => res.send(user));
 };
 
 const follow = async (req, res) => {
