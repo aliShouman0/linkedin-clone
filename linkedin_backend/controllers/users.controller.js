@@ -11,7 +11,11 @@ const updateUser = async (req, res) => {
     .then((user) => res.send(user))
     .catch((err) => res.status(400).send(err));
 };
- 
+
+const getUser = async (req, res) => {
+  const { id } = req.params;
+  userModel.findOne({ _id: id }).then((user) => res.send(user));
+};
 
 const follow = async (req, res) => {
   const { _id } = req.user;
