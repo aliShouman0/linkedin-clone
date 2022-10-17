@@ -25,7 +25,77 @@ function Signup() {
   const [load, setLoad] = useState(false);
   const [photo, setphoto] = useState("NA");
 
- 
+  const submit = (e) => {
+    e.preventDefault();
+    setLoad(true);
+    setError(false);
+    if (!email) {
+      setError(true);
+      setLoad(false);
+      return;
+    }
+    if (!name) {
+      setError(true);
+      setLoad(false);
+      return;
+    }
+    if (!date) {
+      setError(true);
+      setLoad(false);
+      return;
+    }
+    if (!location) {
+      setError(true);
+      setLoad(false);
+      return;
+    }
+    if (!password) {
+      setError(true);
+      setLoad(false);
+      return;
+    }
+    if (company && !type) {
+      setError(true);
+      setLoad(false);
+      return;
+    }
+    if (company && !description) {
+      setError(true);
+      setLoad(false);
+      return;
+    }
+    if (!company && !degree) {
+      setError(true);
+      setLoad(false);
+      return;
+    }
+    if (!company && !experience) {
+      setError(true);
+      setLoad(false);
+      return;
+    }
+    // setName("");
+    // setdate("");
+    // setEmail("");
+    // setPassword("");
+
+    main.signup(
+      email,
+      password,
+      name,
+      date,
+      location,
+      photo,
+      company,
+      type,
+      description,
+      degree,
+      experience,
+      setError,
+      navigate,
+      setLoad
+    );
+  };
 
   return (
     <div className="container flex flex-col h-screen justify-between overflow-x-hidden relative">
