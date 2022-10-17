@@ -12,6 +12,24 @@ function Login() {
   const [error, setError] = useState(false);
   const [load, setLoad] = useState(false);
 
+  const submit = (e) => {
+    e.preventDefault();
+    setLoad(true);
+    setError(false);
+    if (!email) {
+      setError(true);
+      setLoad(false);
+      return;
+    }
+    if (!password) {
+      setError(true);
+      setLoad(false);
+      return;
+    }
+    setEmail("");
+    setPassword("");
+    //main.login(email, password, setError, navigate);
+  };
 
   return (
     <div className="container flex flex-col h-screen justify-between">
