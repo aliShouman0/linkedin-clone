@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import CompanyInput from "../components/CompanyInput";
 import UserInput from "../components/UserInput";
 import camera from "../assets/camera.svg";
-import loadImg from "../assets/load20.gif";
+import loadImg from "../assets/load22.gif";
 import main from "../main";
 
 function Signup() {
@@ -25,17 +25,15 @@ function Signup() {
   const [load, setLoad] = useState(false);
   const [photo, setphoto] = useState("NA");
 
+ 
 
-
-  if (load) {
-    return (
-      <div className="fixed top-0 left-0 w-screen h-screen">
-        <img src={loadImg} alt="loadImg" className="w-screen h-screen" />
-      </div>
-    );
-  }
   return (
-    <div className="container flex flex-col h-screen justify-between overflow-x-hidden">
+    <div className="container flex flex-col h-screen justify-between overflow-x-hidden relative">
+      {load && (
+        <div className="fixed   w-screen h-screen  top-1/4   ">
+          <img src={loadImg} alt="loadImg" className="w-1/4 h-1/4 m-auto" />
+        </div>
+      )}
       <header className="h-20 w-28">
         <img src={logo} alt="logo" className="h-14 w-28" />
       </header>
@@ -135,7 +133,7 @@ function Signup() {
               </p>
             )}
             <input
-              type={"submit"} 
+              type={"submit"}
               value="Agree & Join"
               className="bg-sky-600 text-white px-5 py-3 rounded-full my-3  w-3/4 cursor-pointer"
             />

@@ -3,37 +3,23 @@ import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import login_img from "../assets/login-img.svg";
 import Footer from "../components/Footer";
+import loadImg from "../assets/load22.gif";
 
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
+  const [load, setLoad] = useState(false);
 
-  const submit = (e) => {
-    e.preventDefault();
-    // setLoad(true);
-    // setdisabled(true);
-    setError(false);
-    if (!email) {
-      setError(true);
-      // setdisabled(false);
-      // setLoad(false);
-      return;
-    }
-    if (!password) {
-      setError(true);
-      // setdisabled(false);
-      // setLoad(false);
-      return;
-    }
-    setEmail("");
-    setPassword("");
-    //.login(email, password, setError, setdisabled, navigate);
-  };
 
   return (
     <div className="container flex flex-col h-screen justify-between">
+      {load && (
+        <div className="fixed   w-screen h-screen  top-1/4   ">
+          <img src={loadImg} alt="loadImg" className="w-1/4 h-1/4 m-auto" />
+        </div>
+      )}
       <header className="h-20 w-28">
         <img src={logo} alt="logo" className="h-14 w-28" />
       </header>
@@ -46,13 +32,15 @@ function Login() {
             <input
               type="text"
               value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className=" p-3 my-2 w-3/4  border border-black outline-none focus:border-sky-600 "
               placeholder="Email"
             />
 
             <input
-              type="text"
+              type="password"
               value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="p-3 my-2 w-3/4  border border-black outline-none focus:border-sky-600 "
               placeholder="Password"
             />
@@ -63,7 +51,6 @@ function Login() {
             )}
             <input
               type={"submit"}
-              // disabled={disabled}
               value="Login in"
               className="bg-sky-600 text-white px-5 py-3 rounded-full my-3  w-3/4 cursor-pointer"
             />

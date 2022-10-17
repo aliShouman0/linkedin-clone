@@ -28,25 +28,61 @@ main.getAPI = async (api_url) => {
   }
 };
 
-main.postAPI = async (api_url, api_data) => {
+main.postAPI = async (api_url, api_data, api_token = null) => {
   try {
-    return await axios.post(api_url, api_data);
+    return await axios.post(api_url, api_data, {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
+        "Access-Control-Allow-Credentials": true,
+        Authorization: "token " + api_token,
+      },
+    });
   } catch (error) {
-    //console.log(error);
-    return error;
+    main.Console("Error from POST API", error);
+  }
+};
+main.signup = async (
+  email,
+  password,
+  name,
+  date,
+  location,
+  photo,
+  company,
+  type,
+  description,
+  degree,
+  experience,
+  setError,
+  navigate,
+  setLoad
+) => {
+  const url = `${main.baseUrl}auth/signup`;
+  const data = {
+    email: email,
+    password: password,
+    name: name,
+    date: date,
+    location: location,
+    photo: photo,
+    user_type: company ? "company" : "user",
+    company_type: type,
+    description: description,
+    degree: degree,
+    experience: experience,
+  };
+  const result = await main.postAPI(url, data);
+  setLoad(false);
+  if (result.status && result.status === 200) {
+    navigate("/login");
+  } else {
+    setError(true);
   }
 };
 
-main.signup=async(email, password, setError, setdisabled, navigate)=>{
-  
-}
-
-
 main.logout = async (navigate) => {
-  const api_logout = `${main.baseUrl}logout`;
-  const data = new FormData();
-  data.append("token", localStorage.getItem("access_token"));
-  await main.postAPI(api_logout, data);
   localStorage.removeItem("access_token");
   localStorage.removeItem("user_info");
   navigate("/login");
@@ -54,11 +90,7 @@ main.logout = async (navigate) => {
 
 // check if login by checking data in  localStorage
 // check if user are login in and chck if token are valid
-main.checkLogin = async (
-  navigate,
-  setIsLogin = null,
-  fromLogin = false
-) => {
+main.checkLogin = async (navigate, setIsLogin = null, fromLogin = false) => {
   if (!localStorage.getItem("access_token")) {
     localStorage.removeItem("user_info");
     if (!fromLogin) {
@@ -125,9 +157,7 @@ main.login = async (email, password, setError, setdisabled, navigate) => {
 //get all Announcements for specific Course
 main.getAnnouncements = (course_nb) =>
   fetch(
-    `${
-      main.baseUrl
-    }get_announcements/${course_nb}?token=${localStorage.getItem(
+    `${main.baseUrl}get_announcements/${course_nb}?token=${localStorage.getItem(
       "access_token"
     )}`
   );
@@ -135,16 +165,16 @@ main.getAnnouncements = (course_nb) =>
 //get all Assignments for specific Course that not submit yet
 main.getAssignments = (course_nb) =>
   fetch(
-    `${
-      main.baseUrl
-    }get_assignments/${course_nb}?token=${localStorage.getItem("access_token")}`
+    `${main.baseUrl}get_assignments/${course_nb}?token=${localStorage.getItem(
+      "access_token"
+    )}`
   );
 
 //get Instructor info
 main.getInstructorInfo = async (setError, id) => {
-  const url = `${
-    main.baseUrl
-  }get_instructor/${id}?token=${localStorage.getItem("access_token")}`;
+  const url = `${main.baseUrl}get_instructor/${id}?token=${localStorage.getItem(
+    "access_token"
+  )}`;
   const res = await main.getAPI(url);
   if (res.status && res.status === 200) {
     return res.data.result[0];
@@ -176,9 +206,9 @@ main.getCourses = async (setError) => {
 
 //get all Courses that enrolled by specific student
 main.getAllCourses = async (setError) => {
-  const url = `${
-    main.baseUrl
-  }get_all_Courses?token=${localStorage.getItem("access_token")}`;
+  const url = `${main.baseUrl}get_all_Courses?token=${localStorage.getItem(
+    "access_token"
+  )}`;
   const res = await main.getAPI(url);
   if (res.status && res.status === 200) {
     return res.data;
@@ -205,9 +235,9 @@ main.getInstructorForAdmin = async (data, setError) => {
 
 //get Instructor info
 main.getInstructors = async (setError) => {
-  const url = `${
-    main.baseUrl
-  }get_instructors?token=${localStorage.getItem("access_token")}`;
+  const url = `${main.baseUrl}get_instructors?token=${localStorage.getItem(
+    "access_token"
+  )}`;
   const res = await main.getAPI(url);
   if (res.status && res.status === 200) {
     return res.data.result;
