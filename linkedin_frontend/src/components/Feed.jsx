@@ -19,7 +19,25 @@ function Feed() {
   console.log(jobs);
   return (
     <div className=" w-1/2 mt-2   flex flex-col items-center ">
-     
+      {error && (
+        <p className=" w-full  text-center text-4xl   rounded-md  text-white">
+          Some Thing is Wrong :(
+        </p>
+      )}
+      {load && !error && (
+        <div className="fixed   w-screen h-screen  top-1/4   ">
+          <img src={loadImg} alt="loadImg" className="w-1/4 h-1/4 m-auto" />
+        </div>
+      )}
+      {jobs.map((job) => (
+        <Job
+          name={"SE"}
+          photo={"NA"}
+          description={job.description}
+          title={job.title}
+          companyId={job.company_id}
+        />
+      ))}
     </div>
   );
 }
