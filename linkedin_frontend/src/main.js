@@ -19,9 +19,17 @@ main.Console = (title, values, oneValue = true) => {
   console.log("___/" + title + "___");
 };
 
-main.getAPI = async (api_url) => {
+main.getAPI = async (api_url, api_token) => {
   try {
-    return await axios(api_url);
+    return await axios(api_url, {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
+        "Access-Control-Allow-Credentials": true,
+        Authorization: "token " + api_token,
+      },
+    });
   } catch (error) {
     // console.log(error);
     return error;
@@ -134,6 +142,16 @@ main.checkLogin = async (navigate, setIslogin) => {
   return;
 };
 
+main.getJob = async (id, setError, setLoad) => {
+  const url = `${main.baseUrl}job`;
+  const result = await main.getAPI(url, localStorage.getItem("access_token"));
+  if (result && result.status === 200) {
+    setLoad(false);
+    return result.data;
+  }
+  setError(true);
+  return;
+};
 // main.login = async (email, password, setError, setdisabled, navigate) => {
 //   const data = new FormData();
 //   const url = `${main.baseUrl}login`;

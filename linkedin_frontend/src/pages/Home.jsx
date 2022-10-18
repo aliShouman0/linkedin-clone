@@ -1,15 +1,13 @@
-import { useNavigate } from "react-router-dom";
-import React, { useEffect } from "react";
+import { useNavigate,useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Nav from "../components/Nav";
-import { useState } from "react";
 import LeftPanel from "../components/LeftPanel";
 import Feed from "../components/Feed";
 import Applicant from "../components/Applicant";
 import Company from "../components/Company";
 import Search from "../components/Search";
 import Notification from "../components/Notification";
-import Profile from "../components/Profile";
-import { useLocation } from "react-router-dom";
+import Profile from "../components/Profile"; 
 import main from "../main";
 
 function Home() {

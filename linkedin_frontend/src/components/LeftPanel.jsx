@@ -8,8 +8,7 @@ function LeftPanel() {
   const navigate = useNavigate();
   const { name, photo, location } = JSON.parse(
     localStorage.getItem("user_info")
-  );
-  console.log(location);
+  ); 
   return (
     <div className="w-[13%]   h-96 m-2 rounded-xl bg-white flex flex-col items-center justify-between   ">
       <div className="text-center my-5">

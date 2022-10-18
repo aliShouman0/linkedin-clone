@@ -1,8 +1,8 @@
 import React from "react";
-
 import profile from "../assets/user.png";
+import { useState, useEffect } from "react";
 
-function Job({ name, photo, description, title, isCompany }) {
+function Job({ name, photo, description, title, isCompany, companyId }) {
   return (
     <>
       <div className="bg-white   w-11/12 h-auto  m-2 p-2 rounded-lg    ">
@@ -43,5 +43,6 @@ function Job({ name, photo, description, title, isCompany }) {
 }
 Job.defaultProps = {
   isCompany: false,
+  companyId: false,
 };
 export default Job;
