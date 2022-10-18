@@ -119,34 +119,19 @@ main.login = async (email, password, setError, setLoad, navigate) => {
 
 // check if login by checking data in  localStorage
 // check if user are login in and chck if token are valid
-main.checkLogin = async (navigate, setIsLogin = null, fromLogin = false) => {
-  if (!localStorage.getItem("access_token")) {
+main.checkLogin = async (navigate, setIslogin) => {
+  if (
+    !localStorage.getItem("access_token") ||
+    !localStorage.getItem("user_info")
+  ) {
     localStorage.removeItem("user_info");
-    if (!fromLogin) {
-      setIsLogin(false);
-      navigate("/login", { state: { wrong: true } });
-    }
-    return;
-  }
-  // get user info
-  const user_info_url = `${main.baseUrl}me`;
-  const api_userInfo = new FormData();
-  api_userInfo.append("token", localStorage.getItem("access_token"));
-  const user_info = await main.postAPI(user_info_url, api_userInfo);
-  if (user_info.status && user_info.status === 200) {
-    localStorage.setItem("user_info", JSON.stringify(user_info.data));
-    if (fromLogin) navigate("/student");
-    else setIsLogin(true);
-    return;
-  } else {
     localStorage.removeItem("access_token");
-    localStorage.removeItem("user_info");
-    if (!fromLogin) {
-      navigate("/login", { state: { wrong: true } });
-      setIsLogin(false);
-    }
+    setIslogin(false);
+    navigate("/login");
     return;
   }
+  setIslogin(true);
+  return;
 };
 
 // main.login = async (email, password, setError, setdisabled, navigate) => {

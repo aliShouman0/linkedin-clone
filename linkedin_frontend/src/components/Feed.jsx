@@ -2,6 +2,7 @@ import React from "react";
 import Job from "./Job";
 
 function Feed() {
+  
   let test =
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, a.";
   return (

@@ -5,7 +5,7 @@ import profile from "../assets/user.png";
 function Job({ name, photo, description, title, isCompany }) {
   return (
     <>
-      <div className="bg-gray-300 w-11/12 h-auto  m-2 p-2 rounded-lg  shadow-2xl shadow-blue-600/25 ">
+      <div className="bg-white   w-11/12 h-auto  m-2 p-2 rounded-lg    ">
         <div className="flex justify-between  ">
           <div className="flex items-center m-3">
             <img
@@ -16,7 +16,7 @@ function Job({ name, photo, description, title, isCompany }) {
             <p>{name} </p>
           </div>
           {!isCompany && (
-            <button className="text-xs h-7 p-1.5 m-auto   bg-slate-500 rounded-md mr-2 ">
+            <button className="text-xs h-7 p-1.5 m-auto   bg-gray-300 rounded-md mr-2 ">
               Follow
             </button>
           )}
@@ -32,7 +32,7 @@ function Job({ name, photo, description, title, isCompany }) {
         </div>
         {!isCompany && (
           <div className="text-right">
-            <button className="p-1.5 text-sm bg-slate-500 rounded-md mr-2 ">
+            <button className="p-1.5 text-sm bg-gray-300 rounded-md mr-2 ">
               Apply
             </button>
           </div>

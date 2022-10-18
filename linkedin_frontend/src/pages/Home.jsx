@@ -1,4 +1,5 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
 import Nav from "../components/Nav";
 import { useState } from "react";
 import LeftPanel from "../components/LeftPanel";
@@ -9,13 +10,21 @@ import Search from "../components/Search";
 import Notification from "../components/Notification";
 import Profile from "../components/Profile";
 import { useLocation } from "react-router-dom";
+import main from "../main";
 
 function Home() {
+  const navigate = useNavigate();
   const location = useLocation();
-
   const [active, setActive] = useState("home");
-  const [isCompany, setIsCompany] = useState(location.state.isCompany);
-  console.log(isCompany, location.state.isCompany);
+  const [islogin, setIslogin] = useState(false);
+  useEffect(() => {
+    main.checkLogin(navigate, setIslogin);
+  }, []);
+
+  if (!islogin) {
+    return <></>;
+  }
+  const isCompany = location.state.isCompany;
 
   return (
     <>
