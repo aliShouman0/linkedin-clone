@@ -29,8 +29,10 @@ function Feed() {
           <img src={loadImg} alt="loadImg" className="w-1/4 h-1/4 m-auto" />
         </div>
       )}
-      {jobs.map((job) => (
+      {jobs.map((job, idx) => (
         <Job
+          jobId={job._id}
+          key={idx}
           name={"SE"}
           photo={"NA"}
           description={job.description}

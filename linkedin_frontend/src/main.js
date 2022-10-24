@@ -152,151 +152,33 @@ main.getJob = async (id, setError, setLoad) => {
   setError(true);
   return;
 };
-// main.login = async (email, password, setError, setdisabled, navigate) => {
-//   const data = new FormData();
-//   const url = `${main.baseUrl}login`;
-//   data.append("email", email);
-//   data.append("password", password);
-//   const login_info = await main.postAPI(url, data);
-//   if (login_info.status && login_info.status === 200) {
-//     // if done save toke and get user info by api
-//     const access_token = login_info.data.access_token;
-//     localStorage.setItem("access_token", access_token);
-//     // get user info
-//     const user_info_url = `${main.baseUrl}me`;
-//     // this api need token
-//     const api_userInfo = new FormData();
-//     api_userInfo.append("token", access_token);
-//     const user_info = await main.postAPI(user_info_url, api_userInfo);
-//     //  if token valid will get user info and save in local storage then redirect to home page
-//     if (user_info.status && user_info.status === 200) {
-//       localStorage.setItem("user_info", JSON.stringify(user_info.data));
-//       navigate("/student");
-//     } else {
-//       localStorage.removeItem("access_token");
-//       localStorage.removeItem("user_info");
-//       setError(true);
-//       setdisabled(false);
-//     }
-//   } else {
-//     setError(true);
-//     setdisabled(false);
-//   }
-// };
 
-//get all Announcements for specific Course
-main.getAnnouncements = (course_nb) =>
-  fetch(
-    `${main.baseUrl}get_announcements/${course_nb}?token=${localStorage.getItem(
-      "access_token"
-    )}`
-  );
-
-//get all Assignments for specific Course that not submit yet
-main.getAssignments = (course_nb) =>
-  fetch(
-    `${main.baseUrl}get_assignments/${course_nb}?token=${localStorage.getItem(
-      "access_token"
-    )}`
-  );
-
-//get Instructor info
-main.getInstructorInfo = async (setError, id) => {
-  const url = `${main.baseUrl}get_instructor/${id}?token=${localStorage.getItem(
-    "access_token"
-  )}`;
-  const res = await main.getAPI(url);
-  if (res.status && res.status === 200) {
-    return res.data.result[0];
-  } else {
-    setError(true);
-  }
-};
-//submit  Assignment
-main.submit_assignment = async (dataToSubmit, close, setsubmit) => {
-  const api = `${main.baseUrl}submit_assignment`;
-  const res = await main.postAPI(api, dataToSubmit);
-  if (res.status && res.status === 200) {
-    close(false);
-    setsubmit(true);
-  }
-};
-//get all Courses that enrolled by specific student
-main.getCourses = async (setError) => {
-  const url = `${main.baseUrl}get_enrolled?token=${localStorage.getItem(
-    "access_token"
-  )}`;
-  const res = await main.getAPI(url);
-  if (res.status && res.status === 200) {
-    return res.data;
-  } else {
-    setError(true);
-  }
+main.checkIsFollow = async (companyId) => {
+  const url = `${main.baseUrl}user/isfollow/${companyId}`;
+  const token = localStorage.getItem("access_token");
+  const res = await main.getAPI(url, token);
+  return res.data;
 };
 
-//get all Courses that enrolled by specific student
-main.getAllCourses = async (setError) => {
-  const url = `${main.baseUrl}get_all_Courses?token=${localStorage.getItem(
-    "access_token"
-  )}`;
-  const res = await main.getAPI(url);
-  if (res.status && res.status === 200) {
-    return res.data;
-  } else {
-    setError(true);
-  }
+main.follow = async (companyId) => {
+  const url = `${main.baseUrl}user/follow`;
+  const token = localStorage.getItem("access_token");
+  const data = {
+    company_id: companyId,
+  };
+  const res = await main.postAPI(url, data, token);
+  return res.status && res.status === 200;
 };
 
-//save Instructor info to load them on seach coures
-main.getInstructor = async (data, setError) => {
-  let ins = await Promise.all(
-    data.map((d) => main.getInstructorInfo(setError, d.course.assign_to))
-  );
-  return ins;
-};
-
-//save Instructor info to load them on seach coures
-main.getInstructorForAdmin = async (data, setError) => {
-  let ins = await Promise.all(
-    data.map((d) => main.getInstructorInfo(setError, d.assign_to))
-  );
-  return ins;
-};
-
-//get Instructor info
-main.getInstructors = async (setError) => {
-  const url = `${main.baseUrl}get_instructors?token=${localStorage.getItem(
-    "access_token"
-  )}`;
-  const res = await main.getAPI(url);
-  if (res.status && res.status === 200) {
-    return res.data.result;
-  } else {
-    setError(true);
-  }
-};
-
-main.addCourse = async (
-  code,
-  name,
-  instructorId,
-  setError,
-  close,
-  addedCourse
-) => {
-  const api = `${main.baseUrl}add_course`;
-  const dataToSubmit = new FormData();
-  dataToSubmit.append("token", localStorage.getItem("access_token"));
-  dataToSubmit.append("code", code);
-  dataToSubmit.append("name", name);
-  dataToSubmit.append("instructorId", instructorId);
-  const res = await main.postAPI(api, dataToSubmit);
-  if (res.status && res.status === 200) {
-    close(false);
-    addedCourse(true);
-  } else {
-    setError(true);
-  }
+main.apply = async (jobId) => {
+  const url = `${main.baseUrl}job/apply`;
+  const token = localStorage.getItem("access_token");
+  const data = {
+    job_id: jobId,
+  };
+  const res = await main.postAPI(url, data, token);
+  console.log(res);
+  return res;
 };
 
 export default main;
