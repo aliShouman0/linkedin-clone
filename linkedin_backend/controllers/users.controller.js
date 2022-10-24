@@ -14,7 +14,7 @@ const updateUser = async (req, res) => {
 
 const getUser = async (req, res) => {
   const { id } = req.params;
-  userModel.find({company_id: id }).then((user) => res.send(user));
+  userModel.find({ company_id: id }).then((user) => res.send(user));
 };
 
 const follow = async (req, res) => {
@@ -29,10 +29,10 @@ const follow = async (req, res) => {
 const isfollow = async (req, res) => {
   const { company_id } = req.params;
   const { _id } = req.user;
-
-  await followModel
-    .findOne({ user_id: _id, company_id })
-    .then((job) => res.send(job));
+  await followModel.findOne({ user_id: _id, company_id }).then((job) => {
+    
+    res.send(job != null);
+  });
 };
 
 const map = (obb) => {
